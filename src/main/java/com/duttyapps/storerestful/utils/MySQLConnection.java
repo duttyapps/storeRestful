@@ -26,41 +26,31 @@ package com.duttyapps.storerestful.utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Carlos Arce Sherader <carce@duttyapps.com>
  */
-@Configuration
-@PropertySource("classpath:application.properties")
+@Component
 public class MySQLConnection {
 
-    @Autowired
     @Value("${db.url}")
     private String url;
 
-    @Autowired
     @Value("${db.username}")
     private String user;
 
-    @Autowired
     @Value("${db.password}")
     private String pass;
 
-    @Autowired
     private Connection con;
 
-    @Bean
-    public Connection getConnection() throws ClassNotFoundException, SQLException {
+    public MySQLConnection() {
+    }
+
+    public Connection getConnection() throws ClassNotFoundException, SQLException, Exception {
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection(url, user, pass);
         //con = DriverManager.getConnection("jdbc:mysql://localhost:3306/android_store?useUnicode=true&characterEncoding=UTF-8&serverTimezone=America/Lima", "root", "carlitos");
@@ -68,12 +58,8 @@ public class MySQLConnection {
         return con;
     }
 
-    public void closeConnection() {
-        try {
-            con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void closeConnection() throws ClassNotFoundException, SQLException, Exception {
+        con.close();
     }
-    
+
 }

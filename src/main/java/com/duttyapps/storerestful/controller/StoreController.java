@@ -44,7 +44,7 @@ public class StoreController {
 
     @RequestMapping(value = "/categories", method = RequestMethod.GET, headers = "Accept=application/json")
     public Categories getCategories() {
-        categoryService = new CategoryService();
+        
         Categories cat = categoryService.getCategories();
         
         return cat;

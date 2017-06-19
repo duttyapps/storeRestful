@@ -43,10 +43,8 @@ public class CategoryDAO {
     @Autowired
     private MySQLConnection db;
 
-    public ArrayList getCategories() throws ClassNotFoundException, SQLException {
+    public ArrayList getCategories() throws ClassNotFoundException, SQLException, Exception {
         ArrayList<Category> result = new ArrayList<>();
-
-        db = new MySQLConnection();
 
         Connection con = db.getConnection();
 
@@ -55,8 +53,8 @@ public class CategoryDAO {
         ResultSet rs;
 
         rs = st.executeQuery(Query);
-        
-        while(rs.next()) {
+
+        while (rs.next()) {
             Category cat = new Category();
             cat.setId(rs.getString("ID"));
             cat.setName(rs.getString("NAME"));
@@ -65,6 +63,28 @@ public class CategoryDAO {
 
         db.closeConnection();
 
+        return result;
+    }
+    
+    public Category getCategory(String id) throws ClassNotFoundException, SQLException, Exception {
+        Category result = new Category();
+        
+        Connection con = db.getConnection();
+
+        String Query = "SELECT ID, NAME FROM categories WHERE ID='" + id + "'";
+        Statement st = con.createStatement();
+        ResultSet rs;
+
+        rs = st.executeQuery(Query);
+        
+        while (rs.next()) {
+            result = new Category();
+            result.setId(rs.getString("ID"));
+            result.setName(rs.getString("NAME"));
+        }
+        
+        db.closeConnection();
+        
         return result;
     }
 }

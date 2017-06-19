@@ -37,13 +37,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CategoryService {
-    
+
     @Autowired
     private CategoryDAO categoryDAO;
     
     public Categories getCategories() {
         Categories categories = new Categories();
-        categoryDAO = new CategoryDAO();
+        
         try {
             ArrayList<Category> mCategories = categoryDAO.getCategories();
             
@@ -56,12 +56,20 @@ public class CategoryService {
             }
 
             categories.setCode("00");
+            categories.setMsg("success");
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             categories.setCode("-1");
-            categories.setMsg(ex.getMessage());
+            categories.setMsg("DataBase error: " + ex.getMessage());
+        } catch (Exception ex) {
+            categories.setCode("-1");
+            categories.setMsg("Error: " + ex.getMessage());
         }
         
         return categories;
+    }
+    
+    public Category getCategory(String id) {
+        
     }
 }
