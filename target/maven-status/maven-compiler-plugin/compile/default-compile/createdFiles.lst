@@ -1,0 +1,10 @@
+com\duttyapps\storerestful\bean\Customer.class
+com\duttyapps\storerestful\service\CategoryService.class
+com\duttyapps\storerestful\utils\MySQLConnection.class
+com\duttyapps\storerestful\controller\StoreController.class
+com\duttyapps\storerestful\dao\CategoryDAO.class
+com\duttyapps\storerestful\bean\Category.class
+com\duttyapps\storerestful\bean\Products.class
+com\duttyapps\storerestful\bean\Categories.class
+com\duttyapps\storerestful\bean\Product.class
+com\duttyapps\storerestful\bean\Response.class
