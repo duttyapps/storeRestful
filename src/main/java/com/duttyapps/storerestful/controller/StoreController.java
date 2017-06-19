@@ -26,7 +26,6 @@ package com.duttyapps.storerestful.controller;
 import com.duttyapps.storerestful.bean.Categories;
 import com.duttyapps.storerestful.bean.Category;
 import com.duttyapps.storerestful.service.CategoryService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StoreController {
 
+    @Autowired
     private CategoryService categoryService;
 
     @RequestMapping(value = "/categories", method = RequestMethod.GET, headers = "Accept=application/json")

@@ -28,11 +28,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.stereotype.Component;
 
 /**
  *
@@ -42,22 +44,26 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @PropertySource("classpath:application.properties")
 public class MySQLConnection {
 
+    @Autowired
     @Value("${db.url}")
-    private String URL;
+    private String url;
 
+    @Autowired
     @Value("${db.username}")
-    private String USER;
+    private String user;
 
+    @Autowired
     @Value("${db.password}")
-    private String PASS;
+    private String pass;
 
+    @Autowired
     private Connection con;
 
     @Bean
     public Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
-        //con = DriverManager.getConnection(URL, USER, PASS);
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/android_store?characterEncoding=utf8&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "carlitos");
+        con = DriverManager.getConnection(url, user, pass);
+        //con = DriverManager.getConnection("jdbc:mysql://localhost:3306/android_store?useUnicode=true&characterEncoding=UTF-8&serverTimezone=America/Lima", "root", "carlitos");
 
         return con;
     }
@@ -69,10 +75,5 @@ public class MySQLConnection {
             Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-
+    
 }

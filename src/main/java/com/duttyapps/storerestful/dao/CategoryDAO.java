@@ -43,7 +43,6 @@ public class CategoryDAO {
     @Autowired
     private MySQLConnection db;
 
-    @Autowired
     public ArrayList getCategories() throws ClassNotFoundException, SQLException {
         ArrayList<Category> result = new ArrayList<>();
 
@@ -51,7 +50,7 @@ public class CategoryDAO {
 
         Connection con = db.getConnection();
 
-        String Query = "SELECT * FROM categories ORDER BY NAME ASC";
+        String Query = "SELECT ID, NAME FROM categories ORDER BY 2 ASC";
         Statement st = con.createStatement();
         ResultSet rs;
 

@@ -28,7 +28,6 @@ import com.duttyapps.storerestful.bean.Category;
 import com.duttyapps.storerestful.dao.CategoryDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,17 +41,17 @@ public class CategoryService {
     @Autowired
     private CategoryDAO categoryDAO;
     
-    @Autowired
     public Categories getCategories() {
         Categories categories = new Categories();
         categoryDAO = new CategoryDAO();
         try {
-            ArrayList<Map<String, Object>> mCategories = (ArrayList<Map<String, Object>>) (categoryDAO.getCategories());
+            ArrayList<Category> mCategories = categoryDAO.getCategories();
             
-            for (Map<String,Object> entry : mCategories) {
+            for (int i = 0; i < mCategories.size(); i++) {
                 Category cat = new Category();
                 
-                cat.setName(entry.get("name").toString());
+                cat.setId(mCategories.get(i).getId());
+                cat.setName(mCategories.get(i).getName());
                 categories.getCategories().add(cat);
             }
 
