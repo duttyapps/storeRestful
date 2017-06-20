@@ -70,6 +70,17 @@ public class CategoryService {
     }
     
     public Category getCategory(String id) {
+        Category cat = new Category();
+        try {
+            cat = categoryDAO.getCategory(id);
+        } catch (SQLException ex) {
+            cat.setId("-1");
+            cat.setName("DataBase error: " + ex.getMessage());
+        } catch (Exception ex) {
+            cat.setId("-1");
+            cat.setName("Error: " + ex.getMessage());
+        }
         
+        return cat;
     }
 }
