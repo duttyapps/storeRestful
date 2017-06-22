@@ -44,17 +44,13 @@ public class StoreController {
 
     @RequestMapping(value = "/categories", method = RequestMethod.GET, headers = "Accept=application/json")
     public Categories getCategories() {
-        
         Categories cat = categoryService.getCategories();
-        
         return cat;
     }
 
     @RequestMapping(value = "/category/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-    public Category getCategoryById(@PathVariable String id) {
-        
+    public Category getCategoryById(@PathVariable String id) {  
         Category cat = categoryService.getCategory(id);
-
         return cat;
     }
 }

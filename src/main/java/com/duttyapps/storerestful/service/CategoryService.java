@@ -26,6 +26,7 @@ package com.duttyapps.storerestful.service;
 import com.duttyapps.storerestful.bean.Categories;
 import com.duttyapps.storerestful.bean.Category;
 import com.duttyapps.storerestful.dao.CategoryDAO;
+import com.duttyapps.storerestful.utils.Const;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,14 +56,14 @@ public class CategoryService {
                 categories.getCategories().add(cat);
             }
 
-            categories.setCode("00");
-            categories.setMsg("success");
+            categories.setCode(Const.SUCCESS_COD);
+            categories.setMsg(Const.SUCCESS_MSG);
             
         } catch (SQLException ex) {
-            categories.setCode("-1");
+            categories.setCode(Const.ERROR_COD);
             categories.setMsg("DataBase error: " + ex.getMessage());
         } catch (Exception ex) {
-            categories.setCode("-1");
+            categories.setCode(Const.ERROR_COD);
             categories.setMsg("Error: " + ex.getMessage());
         }
         
@@ -74,10 +75,10 @@ public class CategoryService {
         try {
             cat = categoryDAO.getCategory(id);
         } catch (SQLException ex) {
-            cat.setId("-1");
+            cat.setId(Const.ERROR_COD);
             cat.setName("DataBase error: " + ex.getMessage());
         } catch (Exception ex) {
-            cat.setId("-1");
+            cat.setId(Const.ERROR_COD);
             cat.setName("Error: " + ex.getMessage());
         }
         
