@@ -56,7 +56,7 @@ public class CustomerService {
 
         } catch (SQLException ex) {
             result.setCode(Const.ERROR_COD);
-            result.setMsg("DataBase error: " + ex.getMessage());
+            result.setMsg("Database error: " + ex.getMessage());
         } catch (Exception ex) {
             result.setCode(Const.ERROR_COD);
             result.setMsg("Error: " + ex.getMessage());

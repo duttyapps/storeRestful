@@ -28,5 +28,98 @@ package com.duttyapps.storerestful.bean;
  * @author Carlos Arce Sherader <carce@duttyapps.com>
  */
 public class Customer {
+    private String id;
+    private String username;
+    private String name;
+    private String lastname;
+    private String email;
+    private String birthday;
+    private String gender;
+    private String mobile;
+    private String telephone;
+
+    public Customer() {
+        this.id = "";
+        this.username = "";
+        this.name = "";
+        this.lastname = "";
+        this.email = "";
+        this.birthday = "";
+        this.gender = "";
+        this.mobile = "";
+        this.telephone = "";
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
     
 }

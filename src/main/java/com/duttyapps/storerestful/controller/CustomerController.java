@@ -26,6 +26,8 @@ package com.duttyapps.storerestful.controller;
 import com.duttyapps.storerestful.domain.LoginCustomerRequest;
 import com.duttyapps.storerestful.domain.LoginCustomerResponse;
 import com.duttyapps.storerestful.service.CustomerService;
+import com.duttyapps.storerestful.utils.Const;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,10 +45,41 @@ public class CustomerController {
     private CustomerService customerService;
     
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces="application/json", consumes="application/json")
-    public LoginCustomerResponse login(@RequestBody LoginCustomerRequest rq) {
+    public LoginCustomerResponse login(@RequestBody LoginCustomerRequest rq, HttpSession session) {
         LoginCustomerResponse result = new LoginCustomerResponse();
         result = customerService.login(rq);
+        
+        if(result.getCode().equals(Const.SUCCESS_COD)) {
+            session.setAttribute("user_id", "1");
+        }
+        
         return result;
+    }
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.POST, produces="application/json")
+    public LoginCustomerResponse logout(HttpSession session) {
+        LoginCustomerResponse result = new LoginCustomerResponse();
+        
+        String response = destroySessionCustomer(session);
+        
+        if(response.equals(Const.SUCCESS_COD)) {
+            result.setCode(Const.SUCCESS_COD);
+            result.setMsg(Const.SUCCESS_MSG);
+        } else {
+            result.setCode(Const.ERROR_COD);
+            result.setMsg(response);
+        }
+        
+        return result;
+    }
+    
+    private String destroySessionCustomer(HttpSession session) {
+        try {
+            session.removeAttribute("user_id");
+            return Const.SUCCESS_COD;
+        } catch(Exception ex) {
+            return ex.getMessage();
+        }
     }
     
 }

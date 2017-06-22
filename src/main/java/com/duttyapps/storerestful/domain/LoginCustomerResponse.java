@@ -30,5 +30,17 @@ import com.duttyapps.storerestful.bean.Response;
  * @author Carlos Arce Sherader <carce@duttyapps.com>
  */
 public class LoginCustomerResponse extends Response {
-    
+    private String id;
+
+    public LoginCustomerResponse() {
+        this.id = "";
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
