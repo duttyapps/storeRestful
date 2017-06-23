@@ -1,3 +1,4 @@
+com\duttyapps\storerestful\domain\ProfileCustomerResponse.class
 com\duttyapps\storerestful\service\CategoryService.class
 com\duttyapps\storerestful\controller\StoreController.class
 com\duttyapps\storerestful\domain\LoginCustomerRequest.class

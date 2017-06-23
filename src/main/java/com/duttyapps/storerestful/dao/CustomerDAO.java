@@ -23,6 +23,7 @@
  */
 package com.duttyapps.storerestful.dao;
 
+import com.duttyapps.storerestful.bean.Customer;
 import com.duttyapps.storerestful.domain.LoginCustomerRequest;
 import com.duttyapps.storerestful.utils.MySQLConnection;
 import java.sql.Connection;
@@ -42,9 +43,9 @@ public class CustomerDAO {
     @Autowired
     private MySQLConnection db;
     
-    public boolean login(LoginCustomerRequest rq) throws SQLException, Exception {
+    public String login(LoginCustomerRequest rq) throws SQLException, Exception {
         
-        boolean result = false;
+        String result = "";
         
         String user = rq.getUsername();
         String pass = rq.getPassword();
@@ -53,12 +54,28 @@ public class CustomerDAO {
         
         String Query = "SELECT ID FROM customers WHERE USERNAME='" + user + "' AND PASSWORD='" + pass + "'";
         Statement st = con.createStatement();
-        ResultSet rs;
-
-        rs = st.executeQuery(Query);
+        ResultSet rs = st.executeQuery(Query);
 
         while (rs.next()) {
-            result = true;
+            result = rs.getString("ID");
+        }
+
+        db.closeConnection();
+        
+        return result;
+    }
+    
+    public Customer profile(String id) throws SQLException, Exception {
+        
+        Customer result = new Customer();
+        Connection con = db.getConnection();
+        
+        String Query = "SELECT * FROM customers WHERE ID='" + id + "'";
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery(Query);
+
+        while (rs.next()) {
+            result.setName(rs.getString("NAME"));
         }
 
         db.closeConnection();

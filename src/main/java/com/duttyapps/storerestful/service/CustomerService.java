@@ -23,6 +23,7 @@
  */
 package com.duttyapps.storerestful.service;
 
+import com.duttyapps.storerestful.bean.Customer;
 import com.duttyapps.storerestful.dao.CustomerDAO;
 import com.duttyapps.storerestful.domain.LoginCustomerRequest;
 import com.duttyapps.storerestful.domain.LoginCustomerResponse;
@@ -44,11 +45,12 @@ public class CustomerService {
     public LoginCustomerResponse login(LoginCustomerRequest rq) {
         LoginCustomerResponse result = new LoginCustomerResponse();
         try {
-            boolean login = customerDAO.login(rq);
+            String login = customerDAO.login(rq);
 
-            if (login) {
+            if (!login.equals("")) {
                 result.setCode(Const.SUCCESS_COD);
                 result.setMsg(Const.SUCCESS_MSG);
+                result.setId(login);
             } else {
                 result.setCode(Const.ERROR_COD);
                 result.setMsg(Const.ERROR_MSG);
@@ -63,5 +65,20 @@ public class CustomerService {
         }
 
         return result;
+    }
+    
+    public Customer profile(String id) {
+        Customer cust = new Customer();
+        try {
+            cust = customerDAO.profile(id);
+        } catch (SQLException ex) {
+            cust.setId(Const.ERROR_COD);
+            cust.setName("DataBase error: " + ex.getMessage());
+        } catch (Exception ex) {
+            cust.setId(Const.ERROR_COD);
+            cust.setName("Error: " + ex.getMessage());
+        }
+        
+        return cust;
     }
 }

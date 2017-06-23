@@ -23,6 +23,7 @@
  */
 package com.duttyapps.storerestful.controller;
 
+import com.duttyapps.storerestful.bean.Customer;
 import com.duttyapps.storerestful.domain.LoginCustomerRequest;
 import com.duttyapps.storerestful.domain.LoginCustomerResponse;
 import com.duttyapps.storerestful.service.CustomerService;
@@ -39,6 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Carlos Arce Sherader <carce@duttyapps.com>
  */
 @RestController
+@RequestMapping(value = "/customer")
 public class CustomerController {
     
     @Autowired
@@ -50,10 +52,17 @@ public class CustomerController {
         result = customerService.login(rq);
         
         if(result.getCode().equals(Const.SUCCESS_COD)) {
-            session.setAttribute("user_id", "1");
+            session.setAttribute("user_id", result.getId());
         }
         
         return result;
+    }
+    
+    @RequestMapping(value = "/profile", method = RequestMethod.POST, headers = "Accept=application/json")
+    public Customer getCategoryById(HttpSession session) {
+        String id = session.getAttribute("user_id").toString();
+        Customer cat = customerService.profile(id);
+        return cat;
     }
     
     @RequestMapping(value = "/logout", method = RequestMethod.POST, produces="application/json")

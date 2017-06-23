@@ -27,7 +27,7 @@ package com.duttyapps.storerestful.bean;
  *
  * @author Carlos Arce Sherader <carce@duttyapps.com>
  */
-public class Customer {
+public class Customer extends Response {
     private String id;
     private String username;
     private String name;
